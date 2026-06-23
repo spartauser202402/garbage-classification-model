@@ -1,3 +1,4 @@
+###papper 증강 오류로 인하여 papper만 증강시키는 코드 작성
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.preprocessing import image
 import os
