@@ -4,6 +4,8 @@ import cv2
 import numpy as np
 import tensorflow as tf
 import os
+from gtts import gTTS
+import base64
 
 # ✅ 모델 로드
 model = tf.keras.models.load_model("garbage_classification_model_inception.h5")
