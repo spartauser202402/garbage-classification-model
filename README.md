@@ -1,65 +1,123 @@
-# Project: AI-powered Waste Management System
+# 🗑️ AI 분리수거 도우미 (시각장애인을 위한 분리수거 서비스)
 
-## Aim: Develop an AI-powered system to improve waste management by accurately identifying and sorting different types of waste material.
+시각장애인이 쓰레기를 카메라에 비추면, AI가 종류를 분류하여 **음성으로 분리수거 방법을 안내**하는 서비스입니다.
 
-## Our Solution ([YouTube Video](https://youtu.be/8tO0eqCPUpM))
-  
-We aim to develop an intelligent waste classification system that can accurately identify different waste categories, such as cardboard, glass, metal, paper, plastic, and trash, using advanced computer vision and deep learning techniques.
+> 본 프로젝트는 [vatsalparikh07/garbage-classification-model](https://github.com/vatsalparikh07/garbage-classification-model)을 **Fork**하여 개발되었습니다.
 
-## Workflow of the Waste Management AI System:
-![image](https://github.com/vatsalparikh07/garbage-classification-model/assets/65659649/8f318baf-d16c-4e9e-98c6-5093a5bd0ab3)
+<br>
 
-1. **Object Input:** The process begins with an input image or video of waste, which must be in JPEG, JPG, PNG, or MP4 format.
+## 📌 프로젝트 개요
 
-2. **Inception Model:** This image is then processed by the Inception Model, which is a type of deep learning model used for image recognition.
+| 항목 | 내용 |
+|------|------|
+| 목표 | 시각장애인을 위한 음성 안내 분리수거 서비스 |
+| 분류 클래스 | 캔(can), 종이(paper), 플라스틱(plastic) |
+| 모델 | MobileNetV2 (Transfer Learning / 파인튜닝) |
+| 음성 안내 | gTTS (한국어 TTS) |
+| UI | Streamlit |
 
-3. **Image Processing:** The model performs image processing to prepare the image for feature extraction.
+<br>
 
-4. **Feature Extraction:** The Inception Model extracts features from the image, which are essential for recognizing the type of waste.
+## 🧠 모델 정보
 
-5. **Evaluation:** The extracted features are evaluated by the model to predict the category of waste.
+- **베이스 모델**: MobileNetV2 (ImageNet 사전학습)
+- **학습 방식**: Transfer Learning (마지막 분류 레이어 교체 후 파인튜닝)
+- **데이터셋**: 캔 / 종이 / 플라스틱 각 500장 (총 1,500장)
+- **데이터 증강**: RandomFlip, RandomRotation, RandomZoom
+- **학습 결과**: Train Accuracy 약 93%, Validation Accuracy 약 77%
 
-6. **Predicted Category:** The model predicts the category of the waste, which could be paper, plastic, cardboard, metal, or trash.
+<br>
 
-7. **Waste Segregation and Disposal Methods:** Based on the predicted category, appropriate waste segregation and disposal methods are determined.
+## 🛠️ 기술 스택
 
-## Key Features
-1. **Automated Sorting Process:**
-   - Utilized InceptioNetV3 Machine learning model for image classification to sort different categories of waste (plastic, metal, glass, paper, and cardboard).
-   - Once the waste material is identified by the model, it is automatically sorted into the appropriate category or bin, where for instance, blue dustbin would be used for recyclable material such as paper.
-   
-2. **Real-Time Video Processing:**
-   - In addition to image classification, our AI system is capable of performing real-time video processing, enabling seamless integration into existing waste management workflows.
-   - By leveraging the computational power of hardware and optimized algorithms, our model can process videos in real-time, detecting and classifying waste materials as they appear.
-   
-3. **Waste Disposal Guidance:**
-   - When a user submits an image or video, our system not only predicts the waste category but also offers specific guidance on the appropriate disposal method and the corresponding bin or container for that particular type of waste.
-   - This feature provides users with the knowledge necessary to contribute to effective waste segregation and recycling efforts, promoting environmental responsibility and sustainable practices.
+- Python 3.11
+- TensorFlow 2.20.0 / Keras 3.13.2
+- Streamlit
+- gTTS (Google Text-to-Speech)
+- OpenCV, Pillow, NumPy
 
-![image](https://github.com/vatsalparikh07/garbage-classification-model/assets/65659649/fa60c6cd-66e9-4150-84ca-b49edfb69ca9)
+<br>
 
-Fig: A Preview of Waste Management AI System’s Website
+## 📂 프로젝트 구조
 
-## Development Process
-Waste Management System Model Pipeline -
+```
+garbage-classification-model/
+├── app.py                                      # Streamlit 메인 앱 (분류 + 음성 안내)
+├── wastemanagement.ipynb                       # 모델 학습 코드
+├── garbage_classification_model_inception.keras # 학습된 모델
+├── README.md
+└── .gitignore
+```
 
-![image](https://github.com/vatsalparikh07/garbage-classification-model/assets/65659649/7b8c3752-4292-455a-8297-fced4e9563a2)
+<br>
 
-1. **Data Collection:** We collected an extensive dataset of waste images across various categories like plastic, metal, glass, paper, and cardboard. Images were sourced from publicly available datasets and captured photos to ensure diversity.
+## ▶️ 실행 방법
 
-2. **Data Preprocessing:** The dataset underwent essential tasks like resizing and formatting to meet the input requirements of our model architecture. We split the dataset into training and testing sets with an 80-20 ratio.
+### 1. 저장소 클론
+```bash
+git clone https://github.com/spartauser202402/garbage-classification-model.git
+cd garbage-classification-model
+```
 
-3. **Data Augmentation:** Several data augmentation techniques were employed, including horizontal flipping, width/height shifting, and region filling modes, to enhance the model's learning capability.
+### 2. 가상환경 생성 및 라이브러리 설치
+```bash
+conda create -n recycling python=3.11
+conda activate recycling
+pip install tensorflow==2.20.0 streamlit pillow opencv-python gtts
+```
 
-4. **Model Training:** We trained the InceptionV3 model, a powerful convolutional neural network architecture, using transfer learning techniques. Pre-trained weights of InceptionV3 were fine-tuned on our waste dataset.
+### 3. 앱 실행
+```bash
+streamlit run app.py
+```
 
-5. **Parameter Optimization:** During the training process, various parameters were fine-tuned, including activation functions (ReLU for hidden layers, softmax for output), and optimization using the Adam optimizer.
+### 4. 사용
+- **📷 카메라 촬영**: 쓰레기를 카메라에 비추고 촬영 → 음성 안내
+- **📁 파일 업로드**: 이미지/영상 업로드 → 음성 안내
 
-6. **Web Application Integration:** After fine-tuning the model, we integrated it into a user-friendly web application using the Streamlit framework. This application allows users to upload waste images or video streams for classification and disposal guidance.
+<br>
 
-7. **Continuous Evaluation:** Throughout the development process, we constantly evaluated the model's performance, fine-tuning hyperparameters, and adjusting the training process as needed to achieve optimal accuracy and ensure reliable waste classification results.
+## 🗂️ 데이터셋
 
-## Challenges
-- **Ambiguous Object Identification:** Addressing instances where the system misidentifies certain materials, such as confusing plastic with glass.
-- **Image Capturing through Camera Issues:** Overcoming challenges in capturing objects through the user’s camera and classifying the waste category.
-- **Computational Expense in Training:** Dealing with the computational intensity and time-consuming nature of the training process.
+데이터는 Google Drive에서 관리되며, 클래스별 폴더 구조로 구성되어 있습니다.
+
+```
+dataset/
+├── can/      # 캔/병 이미지
+├── paper/    # 종이 이미지
+└── plastic/  # 플라스틱 이미지
+```
+
+> 원본 이미지(.heic, .webp)는 학습 전 .jpg로 변환하여 사용했습니다.
+
+<br>
+
+## 👥 팀원 역할 분담
+
+| 팀원 | Branch | 담당 |
+|------|--------|------|
+| 강채린 | `feature/tts` | 음성 안내(TTS) 기능 + 카메라 입력 + 앱 통합 |
+| 이현지 | `feature/finetune` | MobileNetV2 모델 학습 / 파인튜닝 |
+| 안유빈 | `feature/preprocessing` | 데이터 전처리 / 증강 |
+
+<br>
+
+## 🔄 협업 방식 (Git Workflow)
+
+```
+main (베이스)
+   │
+   ├── feature/tts          → PR → merge
+   ├── feature/finetune     → PR → merge
+   └── feature/preprocessing → PR → merge
+```
+
+각 팀원이 개별 브랜치에서 작업 후, Pull Request를 통해 코드 리뷰 및 `main` 브랜치로 병합하였습니다.
+
+<br>
+
+## 📝 향후 개선 방향
+
+- 실시간 영상 스트리밍 기반 자동 분류
+- 분류 클래스 확장 (유리, 비닐 등)
+- 데이터 증강을 통한 검증 정확도 향상
