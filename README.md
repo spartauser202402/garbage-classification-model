@@ -53,7 +53,7 @@ garbage-classification-model/
 └── .gitignore
 ```
 
-> ⚠️ 모델 파일(`garbage_classification_model_inception.keras`)은 용량 문제로 GitHub에 포함되지 않습니다. 아래 Google Drive 링크에서 다운로드 후 프로젝트 루트에 위치시켜 주세요.
+> ⚠️ 모델 파일(`garbage_classification_model_inception.keras`)은 용량 문제로 GitHub에 포함되지 않습니다. Google Drive에서 다운로드 후 프로젝트 루트에 위치시켜 주세요.
 
 <br>
 
@@ -97,6 +97,8 @@ streamlit run app.py
 ## 🗂️ 데이터셋
 
 데이터는 Google Drive에서 관리되며, 클래스별 폴더 구조로 구성되어 있습니다.
+
+📁 **[Google Drive 데이터셋 링크](https://drive.google.com/drive/folders/1Wa79cbpFMvh9enzp1iVO5G6kkXUoYxDF?usp=sharing)**
 
 ```
 dataset/
