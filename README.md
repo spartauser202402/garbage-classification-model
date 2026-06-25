@@ -96,7 +96,7 @@ dataset/
 
 | 팀원 | Branch | 담당 |
 |------|--------|------|
-| 강채린 | `feature/tts` | 음성 안내(TTS) 기능 + 카메라 입력 + 앱 통합 |
+| 강채린 | `feature/tts` | 음성 안내(TTS) 기능 + 카메라 입력 + 앱 통합 / 깃허브 main branch관리 |
 | 이현지 | `feature/finetune` | MobileNetV2 모델 학습 / 파인튜닝 |
 | 안유빈 | `feature/preprocessing` | 데이터 전처리 / 증강 |
 
