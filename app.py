@@ -110,7 +110,7 @@ def main():
             elif uploaded_file.type.startswith('video'):
                 try:
                     (predicted_category, confidence), frame = predict_from_video(uploaded_file.read())
-                    st.video(uploa  ded_file)
+                    st.video(uploaded_file)
                     show_result(predicted_category, confidence)
                 except RuntimeError as e:
                     st.error(str(e))
